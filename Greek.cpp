@@ -3,22 +3,6 @@
 using namespace std;
 
 
-// Class Gamma
-class Gamma
-{
-	private:
-		char id;
-
-	public:
-		Gamma(char a_id) : id(a_id) {}
-
-		void display()
-		{
-			cout << "ID: " << id << endl;
-		}
-};
-
-
 // Class Beta
 class Beta
 {
@@ -35,6 +19,22 @@ class Beta
 };
 
 
+// Class Gamma
+class Gamma
+{
+	private:
+		char id;
+
+	public:
+		Gamma(char a_id) : id(a_id) {}
+
+		void display()
+		{
+			cout << "ID: " << id << endl;
+		}
+};
+
+
 // Class Alpha
 class Alpha
 {
@@ -45,7 +45,8 @@ class Alpha
 		int part;
 
 	public:
-		Alpha(string a_name, int a_part, char a_id) : name(a_name), part(a_part), myGamma(a_id), myBeta(nullptr) {}
+		Alpha(string a_name, int a_part, char a_id) 
+			: name(a_name), part(a_part), myGamma(a_id), myBeta(nullptr) {}
 
 		~Alpha()
 		{
@@ -70,6 +71,16 @@ class Alpha
 			myGamma.display();
 			myBeta->display();
 		}
+
+		//void display()
+		//{
+		//	cout << "Part: " << part << endl;
+		//	myGamma.display();
+		//	if (myBeta != nullptr)
+		//	{
+		//		myBeta->display();
+		//	}
+		//}
 };
 
 
@@ -86,18 +97,24 @@ class Delta : public Alpha
 		void display()
 		{
 			Alpha::display();
-			cout << "Desc: " << desc << endl;  // ******************************** Is this part correct???????
+			cout << "Desc: " << desc << endl;  
 		}
 };
 
 
 int main()
 {
-	Delta* d = new Delta("paul", "desc", 2, 'D');
+	// dynamic instantiation
+	Delta* d1 = new Delta("paul", "desc", 2, 'D');
+	d1->setBeta(25);
+	d1->display();
 
-	d->setBeta(25);
+	cout << endl << endl;
 
-	d->display();
+	// static instantiation
+	Delta d2("Dilbert", "part desc", 123, 'x');
+	d2.setBeta(3.5);
+	d2.display();
 
 	system("pause");
 	return 0;
